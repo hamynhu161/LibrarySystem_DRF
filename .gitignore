@@ -1,0 +1,28 @@
+# Ignore Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+env/
+ENV/
+
+# Ignore Django database file (SQLite)
+db.sqlite3
+
+# Ignore environment variable files
+*.env
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore migration files if you don’t want to commit them
+# (Optional — you may remove this if you want to share migrations)
+# */migrations/
+# !*/migrations/__init__.py

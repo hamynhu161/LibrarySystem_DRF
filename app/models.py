@@ -31,3 +31,19 @@ class Lainaus(models.Model):
 
     class Meta:
         ordering = ['kirja']
+
+
+    def save(self, *args, **kwargs):
+    # Jos laina on aktiivinen (ei palautettu), merkitse kirja ei-saatavilla olevaksi
+        if self.palautettu_aika is None:
+            self.kirja.saatavissa = False
+        else:
+            self.kirja.saatavissa = True
+        self.kirja.save() 
+        super().save(*args, **kwargs) # Tallenna itse laina
+
+    def delete(self, *args, **kwargs):
+        # Jos laina on poistettu, merkitse kirja saatavilla olevaksi
+        self.kirja.saatavissa = True
+        self.kirja.save()
+        super().delete(*args, **kwargs)

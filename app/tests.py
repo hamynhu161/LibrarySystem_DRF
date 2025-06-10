@@ -36,10 +36,10 @@ class ViewSetTest(TestCase):
 
         # Kirjanlisääminen ja asiakkaanlisääminen vaativat tässä ensiksi luotavan lainauksen
         kirja_set = KirjaViewSet.as_view({'get': 'retrieve'})      
-        kirja = Kirja.objects.create(otsikko="Oma Suomi 2", kirjoittaja="Finn Lectura", isbn="9789511470946", saatavissa=True)
+        kirja = Kirja.objects.create(otsikko="Test", kirjoittaja="Test", isbn="12345678910", saatavissa=True)
 
         asiakas_set = AsiakasViewSet.as_view({'get': 'retrieve'})  
-        asiakas = Asiakas.objects.create(nimi="Pekka", puhelin="123456789", email="pekka@kuparinen.fi")
+        asiakas = Asiakas.objects.create(nimi="Niina", puhelin="123456789", email="pekka@kuparinen.fi")
 
         lainaus_set = LainausViewSet.as_view({'get': 'retrieve'})   
         lainaus = Lainaus.objects.create(kirja=kirja, asiakas=asiakas, lainattu_aika=datetime(2025, 6, 9, 12, 0, 0))
@@ -47,5 +47,7 @@ class ViewSetTest(TestCase):
         # testataan että tulee oikea statuskoodi
         self.assertEqual(response.status_code, 200)
         # testataan että objekti luottiin juuri sellaiseksi kuin oli tarkoitus
-        self.assertEqual(response.data, {'id': 1, 'kirja': 1, 'asiakas': 1, 'lainattu_aika': '2025-06-09T12:00:00Z', 'palautettu_aika': None})
-        
+        self.assertEqual(response.data, {'id': 1, 'kirja': 2, 'asiakas': 2, 'lainattu_aika': '2025-06-09T12:00:00Z', 'palautettu_aika': None})
+        # testataan että kirjan tila ladataan uudelleen tietokannasta
+        kirja_päivitetty = Kirja.objects.get(id=kirja.id)
+        self.assertFalse(kirja_päivitetty.saatavissa)

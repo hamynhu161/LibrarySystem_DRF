@@ -11,6 +11,4 @@ python manage.py collectstatic --no-input
 # Apply any outstanding database migrations
 python manage.py migrate
 
-# Simplify test or demo deployments by automatically ensuring a superuser always exists
-# (In real production: It’s generally better to remove this line and create a superuser manually)
-python manage.py createsuperuser --no-input     
+  

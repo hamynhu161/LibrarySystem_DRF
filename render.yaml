@@ -20,9 +20,3 @@ services:
         generateValue: true
       - key: WEB_CONCURRENCY
         value: 4
-      - key: DJANGO_SUPERUSER_USERNAME
-        value: "hamynhu"
-      - key: DJANGO_SUPERUSER_PASSWORD
-        value: "Testaaja"
-      - key: DJANGO_SUPERUSER_EMAIL
-        value: "hamynhu161@com"
